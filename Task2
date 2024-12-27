@@ -1,0 +1,98 @@
+#include <stdio.h>
+
+// Function prototypes
+float celsiusToFahrenheit(float celsius);  // Function to convert Celsius to Fahrenheit
+float fahrenheitToCelsius(float fahrenheit);  // Function to convert Fahrenheit to Celsius
+
+int main() {
+    int choice;               // Variable to store the user's choice
+    float temperature;        // Variable to store the input temperature
+    float convertedTemperature; // Variable to store the converted temperature
+    char proceed;             // Variable to determine if the user wants to continue
+
+    do {
+        // Display menu
+        printf("====================================\n");
+        printf("      Temperature Converter\n");
+        printf("====================================\n");
+        printf("1. Celsius to Fahrenheit\n");  // Option 1: Celsius to Fahrenheit
+        printf("2. Fahrenheit to Celsius\n");  // Option 2: Fahrenheit to Celsius
+        printf("3. Exit\n");  // Option 3: Exit the program
+        printf("====================================\n");
+
+        // Prompt the user for their choice
+        printf("Enter your choice (1, 2, or 3): ");
+        
+        // Validate user input for choice
+        while (scanf_s("%d", &choice) != 1) {  // Ensure the input is an integer
+            printf("Invalid input. Please enter 1, 2, or 3: ");
+            while (getchar() != '\n');  // Clear the input buffer for invalid input
+        }
+
+        // Exit the program if the user chooses option 3
+        if (choice == 3) {
+            printf("\nExiting the program. Goodbye!\n");
+            break;
+        }
+
+        // Handle the user's choice
+        switch (choice) {
+            case 1:  // Celsius to Fahrenheit conversion
+                printf("\nEnter temperature in Celsius: ");
+                
+                // Validate user input for temperature
+                while (scanf_s("%f", &temperature) != 1) {  // Ensure the input is a float
+                    printf("Invalid input. Please enter a valid temperature: ");
+                    while (getchar() != '\n');  // Clear the input buffer for invalid input
+                }
+                
+                // Convert Celsius to Fahrenheit
+                convertedTemperature = celsiusToFahrenheit(temperature);
+                printf("\n%.2f Celsius is equal to %.2f Fahrenheit\n", temperature, convertedTemperature);
+                break;
+
+            case 2:  // Fahrenheit to Celsius conversion
+                printf("\nEnter temperature in Fahrenheit: ");
+                
+                // Validate user input for temperature
+                while (scanf_s("%f", &temperature) != 1) {  // Ensure the input is a float
+                    printf("Invalid input. Please enter a valid temperature: ");
+                    while (getchar() != '\n');  // Clear the input buffer for invalid input
+                }
+                
+                // Convert Fahrenheit to Celsius
+                convertedTemperature = fahrenheitToCelsius(temperature);
+                printf("\n%.2f Fahrenheit is equal to %.2f Celsius\n", temperature, convertedTemperature);
+                break;
+
+            default:  // Handle invalid choice
+                printf("\nInvalid choice. Please enter 1, 2, or 3.\n");
+                break;
+        }
+
+        // Prompt the user to continue or exit
+        printf("\nDo you want to perform another conversion? (Y/N): ");
+        getchar();  // Consume leftover newline character from the buffer
+        proceed = getchar();  // Read the user's response
+
+    } while (proceed == 'Y' || proceed == 'y');  // Continue if the user enters 'Y' or 'y'
+
+    // Program termination message
+    printf("\n====================================\n");
+    printf("Thank you for using the Temperature Converter!\n");  // Farewell message
+    printf("====================================\n");
+
+    return 0;  // Indicate successful program execution
+}
+
+// Function to convert Celsius to Fahrenheit
+float celsiusToFahrenheit(float celsius) {
+    // Apply the conversion formula: F = (C * 9/5) + 32
+    return (celsius * 9.0 / 5.0) + 32.0;
+}
+
+// Function to convert Fahrenheit to Celsius
+float fahrenheitToCelsius(float fahrenheit) {
+    // Apply the conversion formula: C = (F - 32) * 5/9
+    return (fahrenheit - 32.0) * 5.0 / 9.0;
+}
